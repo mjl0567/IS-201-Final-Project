@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ford Truck Match Finder</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to bottom, #d9e2ec, #f5f7fa);
+            color: #1f2933;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px 50px 20px;
+        }
+
+        .nav-box {
+            background-color: #102a43;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .nav-box a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 14px;
+        }
+
+        .nav-box a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            background-color: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin-top: 0;
+            color: #102a43;
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #7b341e;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #bcccdc;
+            box-sizing: border-box;
+        }
+
+        .range-value {
+            font-weight: bold;
+            color: #243b53;
+            margin-top: 6px;
+        }
+
+        .button-row {
+            margin-top: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        button {
+            background-color: #102a43;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #243b53;
+        }
+
+        .secondary-btn {
+            background-color: #7b341e;
+        }
+
+        .secondary-btn:hover {
+            background-color: #9c4221;
+        }
+
+        .result-box {
+            margin-top: 18px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f0f4f8;
+            border-left: 6px solid #102a43;
+            min-height: 150px;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            color: #102a43;
+            margin-bottom: 10px;
+        }
+
+        .truck-tag {
+            display: inline-block;
+            background-color: #d9e2ec;
+            color: #102a43;
+            padding: 6px 10px;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            text-align: center;
+            color: #52606d;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="nav-box">
+            <a href="index.html">Professional Page</a>
+            <a href="scratch.html">Ford Trucks Scratch Page</a>
+        </div>
+
+        <div class="hero">
+            <h1>Ford Truck Match Finder</h1>
+            <p>
+                This small web app recommends a type of Ford truck based on how you want to use it.
+                Pick your preferences, click the button, and the app will suggest the best fit.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Your Preferences</h2>
+
+                <label for="useType">Primary Use</label>
+                <select id="useType">
+                    <option value="daily">Daily driving</option>
+                    <option value="work">Work and hauling</option>
+                    <option value="towing">Heavy towing</option>
+                    <option value="classic">Classic truck style</option>
+                </select>
+
+                <label for="sizeType">Preferred Truck Size</label>
+                <select id="sizeType">
+                    <option value="small">Smaller and easier to drive</option>
+                    <option value="medium">Balanced size</option>
+                    <option value="large">Big truck feel</option>
+                </select>
+
+                <label for="comfortType">Cab / Comfort Preference</label>
+                <select id="comfortType">
+                    <option value="basic">Basic and simple</option>
+                    <option value="mid">Comfortable but practical</option>
+                    <option value="luxury">More comfort and features</option>
+                </select>
+
+                <label for="towingSlider">How important is towing power?</label>
+                <input type="range" id="towingSlider" min="1" max="10" value="5">
+                <div class="range-value">Towing Priority: <span id="towingValue">5</span>/10</div>
+
+                <label for="styleSlider">How important is classic truck style?</label>
+                <input type="range" id="styleSlider" min="1" max="10" value="5">
+                <div class="range-value">Classic Style Priority: <span id="styleValue">5</span>/10</div>
+
+                <div class="button-row">
+                    <button onclick="findTruck()">Find My Ford Truck</button>
+                    <button class="secondary-btn" onclick="surpriseMe()">Surprise Me</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Your Result</h2>
+                <div class="result-box" id="resultBox">
+                    <div class="result-title">No result yet</div>
+                    <p>Choose your preferences, then click <strong>Find My Ford Truck</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="footer-note">
+            This app was created as a single-page HTML, CSS, and JavaScript project.
+        </p>
+    </div>
+
+    <script>
+        const towingSlider = document.getElementById("towingSlider");
+        const styleSlider = document.getElementById("styleSlider");
+        const towingValue = document.getElementById("towingValue");
+        const styleValue = document.getElementById("styleValue");
+
+        towingSlider.addEventListener("input", function () {
+            towingValue.textContent = towingSlider.value;
+        });
+
+        styleSlider.addEventListener("input", function () {
+            styleValue.textContent = styleSlider.value;
+        });
+
+        function findTruck() {
+            const useType = document.getElementById("useType").value;
+            const sizeType = document.getElementById("sizeType").value;
+            const comfortType = document.getElementById("comfortType").value;
+            const towing = parseInt(document.getElementById("towingSlider").value);
+            const style = parseInt(document.getElementById("styleSlider").value);
+
+            let truckName = "";
+            let description = "";
+            let tags = [];
+
+            if (useType === "classic" || style >= 8) {
+                truckName = "Classic Ford F-150 / OBS Era Truck";
+                description = "You seem drawn to timeless truck styling and old-school character. A classic Ford pickup would fit your interest in strong looks, simple design, and truck personality.";
+                tags = ["Classic Style", "Simple Design", "Strong Character"];
+            } else if (useType === "towing" || towing >= 9 || (sizeType === "large" && towing >= 7)) {
+                truckName = "Ford F-250 Super Duty";
+                description = "You want serious truck capability. The F-250 Super Duty fits people who care more about towing, hauling, and heavy-duty strength than just easy daily driving.";
+                tags = ["Heavy Duty", "Towing Focus", "Big Truck Feel"];
+            } else if (useType === "work" && comfortType === "basic") {
+                truckName = "Ford F-150 XL";
+                description = "You seem to want a straightforward work truck. The F-150 XL is a practical choice for utility, reliability, and getting the job done without extra luxury.";
+                tags = ["Work Truck", "Practical", "Simple"];
+            } else if (useType === "work" || towing >= 6) {
+                truckName = "Ford F-150 XLT";
+                description = "You want a balanced truck that can handle real work but still feels comfortable enough for normal driving. The F-150 XLT is a solid middle-ground option.";
+                tags = ["Balanced", "Useful", "Everyday Capability"];
+            } else if (useType === "daily" && sizeType === "small") {
+                truckName = "Ford Ranger";
+                description = "You seem to prefer something easier to drive and more manageable in size. The Ford Ranger is a good match for daily use with truck utility in a smaller package.";
+                tags = ["Smaller Size", "Daily Driver", "Easy to Handle"];
+            } else if (comfortType === "luxury") {
+                truckName = "Ford F-150 Lariat";
+                description = "You want a truck that still feels comfortable and refined. The F-150 Lariat matches buyers who want capability with a more premium interior and features.";
+                tags = ["Comfort", "Features", "Refined Truck"];
+            } else {
+                truckName = "Ford F-150";
+                description = "Your choices point to the classic all-around Ford truck. The F-150 is a versatile option that mixes everyday usability, capability, and strong overall value.";
+                tags = ["Versatile", "Popular", "All-Around Truck"];
+            }
+
+            showResult(truckName, description, tags, useType, sizeType, comfortType, towing, style);
+        }
+
+        function showResult(truckName, description, tags, useType, sizeType, comfortType, towing, style) {
+            const resultBox = document.getElementById("resultBox");
+
+            let tagHTML = "";
+            for (let i = 0; i < tags.length; i++) {
+                tagHTML += `<span class="truck-tag">${tags[i]}</span>`;
+            }
+
+            resultBox.innerHTML = `
+                <div class="result-title">${truckName}</div>
+                <p>${description}</p>
+                <p><strong>Your choices:</strong> ${formatUse(useType)}, ${formatSize(sizeType)}, ${formatComfort(comfortType)}, towing priority ${towing}/10, classic style priority ${style}/10.</p>
+                <div>${tagHTML}</div>
+            `;
+        }
+
+        function formatUse(value) {
+            if (value === "daily") return "daily driving";
+            if (value === "work") return "work and hauling";
+            if (value === "towing") return "heavy towing";
+            return "classic truck style";
+        }
+
+        function formatSize(value) {
+            if (value === "small") return "smaller size";
+            if (value === "medium") return "balanced size";
+            return "large size";
+        }
+
+        function formatComfort(value) {
+            if (value === "basic") return "basic comfort";
+            if (value === "mid") return "mid-level comfort";
+            return "higher comfort";
+        }
+
+        function surpriseMe() {
+            const useOptions = ["daily", "work", "towing", "classic"];
+            const sizeOptions = ["small", "medium", "large"];
+            const comfortOptions = ["basic", "mid", "luxury"];
+
+            document.getElementById("useType").value = useOptions[Math.floor(Math.random() * useOptions.length)];
+            document.getElementById("sizeType").value = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
+            document.getElementById("comfortType").value = comfortOptions[Math.floor(Math.random() * comfortOptions.length)];
+
+            const randomTowing = Math.floor(Math.random() * 10) + 1;
+            const randomStyle = Math.floor(Math.random() * 10) + 1;
+
+            document.getElementById("towingSlider").value = randomTowing;
+            document.getElementById("styleSlider").value = randomStyle;
+            towingValue.textContent = randomTowing;
+            styleValue.textContent = randomStyle;
+
+            findTruck();
+        }
+    </script>
+</body>
+</html>
